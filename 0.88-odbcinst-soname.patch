@@ -1,0 +1,37 @@
+--- origsrc/sqliteodbc-0.85/configure.in	2009-09-04 10:29:29.000000000 -0500
++++ src/sqliteodbc-0.85/configure.in	2010-06-06 01:10:12.033905600 -0500
+@@ -490,9 +490,9 @@ main(int argc, char **argv)
+    void *lib;
+    int (*gpps)();
+ 
+-   lib = dlopen("libodbcinst.so", RTLD_LAZY);
++   lib = dlopen("cygodbcinst-1.dll", RTLD_LAZY);
+    if (!lib) {
+-      lib = dlopen("libiodbcinst.so", RTLD_LAZY);
++      lib = dlopen("cygiodbcinst-2.dll", RTLD_LAZY);
+    }
+    if (lib) {
+       gpps = (int (*)()) dlsym(lib, "SQLGetPrivateProfileString");
+--- origsrc/sqliteodbc-0.85/sqliteodbc.c	2010-01-05 09:03:08.000000000 -0600
++++ src/sqliteodbc-0.85/sqliteodbc.c	2010-06-06 01:11:30.251379300 -0500
+@@ -724,6 +724,12 @@ drvgetgpps(DBC *d)
+     void *lib;
+     int (*gpps)();
+ 
++#ifdef __CYGWIN__
++    lib = dlopen("cygodbcinst-1.dll", RTLD_LAZY);
++    if (!lib) {
++	lib = dlopen("cygiodbcinst-2.dll", RTLD_LAZY);
++    }
++#else
+     lib = dlopen("libodbcinst.so.1", RTLD_LAZY);
+     if (!lib) {
+ 	lib = dlopen("libodbcinst.so", RTLD_LAZY);
+@@ -734,6 +740,7 @@ drvgetgpps(DBC *d)
+     if (!lib) {
+ 	lib = dlopen("libiodbcinst.so", RTLD_LAZY);
+     }
++#endif
+     if (lib) {
+ 	gpps = (int (*)()) dlsym(lib, "SQLGetPrivateProfileString");
+ 	if (!gpps) {

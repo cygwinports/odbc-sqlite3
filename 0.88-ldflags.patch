@@ -1,0 +1,29 @@
+--- origsrc/sqliteodbc-0.85/Makefile.in	2009-03-26 04:22:43.000000000 -0500
++++ src/sqliteodbc-0.85/Makefile.in	2010-04-27 01:39:15.924627900 -0500
+@@ -35,22 +35,22 @@ all:		@LIB_TARGETS@
+ libsqliteodbc.la:	sqliteodbc.lo
+ 		$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o libsqliteodbc.la \
+ 		    sqliteodbc.lo -rpath $(libdir) $(SQLITE_LIB) \
+-		    $(ODBC_LIB) -release $(VER_INFO)
++		    $(ODBC_LIB) -module -avoid-version -no-undefined
+ 
+ libsqlite3odbc.la:	sqlite3odbc.lo $(SQLITE3_A10N_O)
+ 		$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o libsqlite3odbc.la \
+ 		    sqlite3odbc.lo $(SQLITE3_A10N_O) -rpath $(libdir) \
+-		    $(SQLITE3_LIB) $(ODBC_LIB) -release $(VER_INFO)
++		    $(SQLITE3_LIB) $(ODBC_LIB) -module -avoid-version -no-undefined
+ 
+ libsqlite3_mod_blobtoxy.la:	blobtoxy.lo
+ 		$(LIBTOOL) --mode=link $(CC) $(CFLAGS) \
+ 		    -o libsqlite3_mod_blobtoxy.la \
+-		    blobtoxy.lo -rpath $(libdir) -release $(VER_INFO)
++		    blobtoxy.lo -rpath $(libdir) -module -avoid-version -no-undefined
+ 
+ libsqlite3_mod_impexp.la:	impexp.lo
+ 		$(LIBTOOL) --mode=link $(CC) $(CFLAGS) \
+ 		    -o libsqlite3_mod_impexp.la \
+-		    impexp.lo -rpath $(libdir) -release $(VER_INFO)
++		    impexp.lo -rpath $(libdir) -module -avoid-version -no-undefined
+ 
+ sqliteodbc.lo:	sqliteodbc.c sqliteodbc.h
+ 		$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c \
