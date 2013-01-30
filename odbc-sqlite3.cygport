@@ -1,0 +1,36 @@
+NAME="odbc-sqlite3"
+VERSION=0.99
+RELEASE=1
+CATEGORY="Database"
+SUMMARY="ODBC SQLite driver"
+DESCRIPTION="This is an open source ODBC driver for the wonderful SQLite 3.x
+Database Engine/Library."
+REQUIRES="libiodbc2"
+HOMEPAGE="http://www.ch-werner.de/sqliteodbc/"
+SRC_URI="http://www.ch-werner.de/sqliteodbc/sqliteodbc-${VERSION}.tar.gz"
+SRC_DIR="sqliteodbc-${VERSION}"
+
+PATCH_URI="
+	0.99-ldflags.patch
+	0.88-odbcinst-soname.patch
+"
+
+DIFF_EXCLUDES="debian"
+DISTCLEANFILES="aclocal.m4"
+
+src_compile() {
+	cd ${S}
+	cygautoreconf
+	lndirs
+	cd ${B}
+	cygconf --disable-static
+	cygmake
+}
+
+src_install() {
+	cd ${B}
+	dodir /usr/lib
+	cyginstall
+}
+
+KEEP_LA_FILES="none"

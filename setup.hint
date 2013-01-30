@@ -1,5 +1,0 @@
-category: Database
-requires: libgcc1 libiodbc2 libsqlite3_0
-sdesc: "ODBC SQLite driver"
-ldesc: "This is an open source ODBC driver for the wonderful SQLite 3.x 
-Database Engine/Library."
