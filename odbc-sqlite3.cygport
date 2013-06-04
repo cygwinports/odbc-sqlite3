@@ -1,5 +1,5 @@
 NAME="odbc-sqlite3"
-VERSION=0.99
+VERSION=0.993
 RELEASE=1
 CATEGORY="Database"
 SUMMARY="ODBC SQLite driver"
@@ -11,7 +11,7 @@ SRC_URI="http://www.ch-werner.de/sqliteodbc/sqliteodbc-${VERSION}.tar.gz"
 SRC_DIR="sqliteodbc-${VERSION}"
 
 PATCH_URI="
-	0.99-ldflags.patch
+	0.993-ldflags.patch
 	0.88-odbcinst-soname.patch
 "
 

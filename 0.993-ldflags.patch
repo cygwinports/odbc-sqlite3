@@ -1,6 +1,6 @@
---- origsrc/sqliteodbc-0.99/Makefile.in	2012-10-09 08:01:13.000000000 -0500
-+++ src/sqliteodbc-0.99/Makefile.in	2013-01-29 23:56:48.552094400 -0600
-@@ -39,33 +39,33 @@ all:		@LIB_TARGETS@
+--- origsrc/sqliteodbc-0.993/Makefile.in	2013-03-17 03:50:39.000000000 -0500
++++ src/sqliteodbc-0.993/Makefile.in	2013-06-03 23:08:37.744261000 -0500
+@@ -48,43 +48,43 @@ all:		@LIB_TARGETS@
  libsqliteodbc.la:	sqliteodbc.lo
  		$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o libsqliteodbc.la \
  		    sqliteodbc.lo -rpath $(drvdir) $(SQLITE_LIB) \
@@ -13,6 +13,12 @@
 -		    $(SQLITE3_LIB) $(ODBC_LIB) -release $(VER_INFO) \
 +		    $(SQLITE3_LIB) $(ODBC_LIB) -module -avoid-version -no-undefined \
  		    @DL_INITFINI@
+ 
+ libsqlite4odbc.la:	sqlite4odbc.lo $(SQLITE4_A10N_O)
+ 		$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o libsqlite4odbc.la \
+ 		    sqlite4odbc.lo $(SQLITE4_A10N_O) -rpath $(drvdir) \
+-		    $(ODBC_LIB) -release $(VER_INFO) @DL_INITFINI@
++		    $(ODBC_LIB) -module -avoid-version -no-undefined @DL_INITFINI@
  
  libsqlite3_mod_blobtoxy.la:	blobtoxy.lo
  		$(LIBTOOL) --mode=link $(CC) $(CFLAGS) \
@@ -37,6 +43,12 @@
  		    -o libsqlite3_mod_zipfile.la \
 -		    zipfile.lo -rpath $(drvdir) -release $(VER_INFO) -lz
 +		    zipfile.lo -rpath $(drvdir) -module -avoid-version -no-undefined -lz
+ 
+ libsqlite3_mod_xpath.la:	xpath.lo
+ 		$(LIBTOOL) --mode=link $(CC) $(CFLAGS) \
+ 		    -o libsqlite3_mod_xpath.la \
+-		    xpath.lo -rpath $(drvdir) -release $(VER_INFO) $(XML2_LIBS)
++		    xpath.lo -rpath $(drvdir) -module -avoid-version -no-undefined $(XML2_LIBS)
  
  sqliteodbc.lo:	sqliteodbc.c sqliteodbc.h
  		$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c \
